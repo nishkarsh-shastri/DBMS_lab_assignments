@@ -1,0 +1,294 @@
+Mekliganj,Cooch Behar,Darjeeling
+Mathabhanga,Cooch Behar,Alipurduars
+Cooch Behar (Uttar),Cooch Behar,Alipurduars
+Cooch Behar (Dakshin),Cooch Behar,Alipurduars
+Sitalkuchi,Cooch Behar,Alipurduars
+Sitai,Cooch Behar,Alipurduars
+Dinhata,Cooch Behar,Alipurduars
+Natabari,Cooch Behar,Alipurduars
+Tufanganj,Cooch Behar,Jalpaiguri
+Kumargram,Jalpaiguri,Jalpaiguri
+Kalchini,Jalpaiguri,Jalpaiguri
+Alipurduars,Jalpaiguri,Jalpaiguri
+Falakata,Jalpaiguri,Jalpaiguri
+Madarihat,Jalpaiguri,Jalpaiguri
+Dhupguri,Jalpaiguri,Darjeeling
+Maynaguri,Jalpaiguri,Darjeeling
+Jalpaiguri,Jalpaiguri,Darjeeling
+Rajganj,Jalpaiguri,Darjeeling
+Dabgram-Phulbari,Jalpaiguri,Darjeeling
+Mal,Jalpaiguri,Maldaha Dakshin
+Nagrakata,Jalpaiguri,Maldaha Dakshin
+Kalimpong,Darjeeling,Raiganj
+Darjeeling,Darjeeling,Raiganj
+Kurseong,Darjeeling,Raiganj
+Matigara-Naxalbari,Darjeeling,Raiganj
+Siliguri,Darjeeling,Raiganj
+Phansidewa,Darjeeling,Raiganj
+Chopra,Uttar Dinajpur,Raiganj
+Islampur, Uttar Dinajpur,Raiganj
+Goalpokhar,Uttar Dinajpur,Balurghat
+Chakulia,Uttar Dinajpur,Balurghat
+Karandighi,Uttar Dinajpur,Balurghat
+Hemtabad,Uttar Dinajpur,Balurghat
+Kaliaganj,Uttar Dinajpur,Balurghat
+Raiganj,Uttar Dinajpur,Balurghat
+Itahar,Uttar Dinajpur,Maldaha Uttar
+Kushmandi,Dakshin Dinajpur,Maldaha Uttar
+Kumarganj,Dakshin Dinajpur,Maldaha Uttar
+Balurghat,Dakshin Dinajpur,Maldaha Uttar
+Tapan,Dakshin Dinajpur,Maldaha Uttar
+Gangarampur,Dakshin Dinajpur,Maldaha Uttar
+Harirampur,Dakshin Dinajpur,Maldaha Uttar
+Habibpur,Maldah,Maldaha Dakshin
+Gazole,Maldah,Maldaha Dakshin
+Chanchal,Maldah,Maldaha Dakshin
+Harishchandrapur,Maldah,Maldaha Dakshin
+Malatipur,Maldah,Maldaha Dakshin
+Ratua,Maldah,Maldaha Dakshin
+Manikchak,Maldah,Jangipur
+Maldah,Maldah,Maldaha Dakshin
+English Bazar,Maldah,Jangipur
+Mothabari,Maldah,Jangipur
+Sujapur,Maldah,Jangipur
+Baisnabnagar,Maldah,Jangipur
+Farakka,Murshidabad,Jangipur
+Samserganj,Murshidabad,Jangipur
+Suti,Murshidabad,Baharampur
+Jangipur,Murshidabad,Baharampur
+Raghunathganj,Murshidabad,Baharampur
+Sagardighi,Murshidabad,Baharampur
+Lalgola,Murshidabad,Baharampur
+Bhagabangola,Murshidabad,Krishnanagar
+Raninagar,Murshidabad,Krishnanagar
+Murshidabad,Murshidabad,Krishnanagar
+Nabagram,Murshidabad,Baharampur
+Khargram,Murshidabad,Baharampur
+Burwan,Murshidabad,Murshidabad
+Kandi,Murshidabad,Murshidabad
+Bharatpur,Murshidabad,Murshidabad
+Rejinagar,Murshidabad,Murshidabad
+Beldanga,Murshidabad,Murshidabad
+Baharampur,Murshidabad,Murshidabad
+Hariharpara,Murshidabad,Krishnanagar
+Naoda,Murshidabad,Murshidabad
+Domkal,Murshidabad,Krishnanagar
+Jalangi,Murshidabad,Krishnanagar
+Karimpur,Nadia,Krishnanagar
+Tehatta,Nadia,Ranaghat
+Palashipara,Nadia,Ranaghat
+Kaliganj,Nadia,Ranaghat
+Nakashipara,Nadia,Ranaghat
+Chapra,Nadia,Ranaghat
+Krishnanagar Uttar,Nadia,Ranaghat
+Nabadwip,Nadia,Ranaghat
+Krishnanagar Dakshin,Nadia,Ranaghat
+Santipur,Nadia,Bangaon
+Ranaghat Uttar Paschim,Nadia,Bangaon
+Krishnaganj,Nadia,Bangaon
+Ranaghat Uttar Purba,Nadia,Bangaon
+Ranaghat Dakshin,Nadia,Bangaon
+Chakdaha,Nadia,Bangaon
+Kalyani,Nadia,Barrackpur
+Haringhata,Nadia,Barrackpur
+Bagda,North 24 Parganas,Barrackpur
+Bangaon Uttar,North 24 Parganas,Barrackpur
+Bangaon Dakshin,North 24 Parganas,Barrackpur
+Gaighata,North 24 Parganas,Barrackpur
+Swarupnagar,North 24 Parganas,Barrackpur
+Baduria,North 24 Parganas,Jaynagar
+Habra,North 24 Parganas,Basirhat
+Ashoknagar,North 24 Parganas,Basirhat
+Amdanga,North 24 Parganas,Dum Dum
+Bijpur,North 24 Parganas,Dum Dum
+Naihati,North 24 Parganas,Dum Dum
+Bhatpara,North 24 Parganas,Dum Dum
+Jagatdal,North 24 Parganas,Dum Dum
+Noapara,North 24 Parganas,Dum Dum
+Barrackpur,North 24 Parganas,Dum Dum
+Khardaha,North 24 Parganas,Barasat
+Dum Dum Uttar,North 24 Parganas,Barasat
+Panihati,North 24 Parganas,Barasat
+Kamarhati,North 24 Parganas,Barasat
+Baranagar,North 24 Parganas,Barasat
+Dum Dum,North 24 Parganas,Barasat
+Rajarhat New Town,North 24 Parganas,Basirhat
+Bidhannagar,North 24 Parganas,Basirhat
+Rajarhat Gopalpur,North 24 Parganas,Basirhat
+Madhyamgram,North 24 Parganas,Basirhat
+Barasat,North 24 Parganas,Basirhat
+Deganga,North 24 Parganas,Basirhat
+Haroa,North 24 Parganas,Jaynagar
+Minakhan,North 24 Parganas,Jaynagar
+Sandeshkhali,North 24 Parganas,Jaynagar
+Basirhat Dakshin,North 24 Parganas,Jaynagar
+Basirhat Uttar,North 24 Parganas,Jaynagar
+Hingalganj,North 24 Parganas,Jaynagar
+Gosaba,South 24 Parganas,Mathurapur
+Basanti,South 24 Parganas,Mathurapur
+Kultali,South 24 Parganas,Mathurapur
+Patharpratima,South 24 Parganas,Diamond Harbour
+Kakdwip,South 24 Parganas,Diamond Harbour
+Sagar,South 24 Parganas,Baharampur
+Kulpi,South 24 Parganas,Diamond Harbour
+Raidighi,South 24 Parganas,Diamond Harbour
+Mandirbazar,South 24 Parganas,Diamond Harbour
+Jaynagar,South 24 Parganas,Mathurapur
+Baruipur Purba,South 24 Parganas,Kolkata Dakshin
+Canning Paschim,South 24 Parganas,Mathurapur
+Canning Purba,South 24 Parganas,Mathurapur
+Baruipur Paschim,South 24 Parganas,Kolkata Dakshin
+Magrahat Purba,South 24 Parganas,Diamond Harbour
+Magrahat Paschim,South 24 Parganas,Diamond Harbour
+Diamond Harbour,South 24 Parganas,Jadavpur
+Falta,South 24 Parganas,Jadavpur
+Satgachhia,South 24 Parganas,Jadavpur
+Bishnupur, South 24 Parganas,Jadavpur
+Sonarpur Dakshin,South 24 Parganas,Kolkata Dakshin
+Bhangar,South 24 Parganas,Kolkata Dakshin
+Kasba,South 24 Parganas,Kolkata Uttar
+Jadavpur,South 24 Parganas,Kolkata Dakshin
+Sonarpur Uttar,South 24 Parganas,Kolkata Dakshin
+Tollyganj,South 24 Parganas,Kolkata Dakshin
+Behala Purba,South 24 Parganas,Kolkata Uttar
+Behala Paschim,South 24 Parganas,Kolkata Uttar
+Maheshtala,South 24 Parganas,Jadavpur
+Budge Budge,South 24 Parganas,Jadavpur
+Metiaburuz,South 24 Parganas,Jadavpur
+Kolkata Port,Kolkata Corporation,Kolkata Uttar
+Bhabanipur,Kolkata Corporation,Kolkata Uttar
+Rashbehari,Kolkata Corporation,Kolkata Uttar
+Ballygunge,Kolkata Corporation,Kolkata Uttar
+Chowranghee,Kolkata Corporation,Kolkata Uttar
+Entally,Kolkata Corporation,Howrah
+Beleghata,Kolkata Corporation,Howrah
+Jorasanko,Kolkata Corporation,Howrah
+Shyampukur,Kolkata Corporation,Howrah
+Maniktala,Kolkata Corporation,Howrah
+Kashipur Belgachhia,Kolkata Corporation,Bankura
+Bally,Howrah,Kolkata Uttar
+Howrah Uttar,Howrah,Uluberia
+Howrah Madhya,Howrah,Uluberia
+Shibpur,Howrah,Uluberia
+Howrah Dakshin,Howrah,Uluberia
+Sankrail,Howrah,Uluberia
+Panchla,Howrah,Uluberia
+Uluberia Purba,Howrah,Sreerampur
+Uluberia Uttar,Howrah,Sreerampur
+Uluberia Dakshin,Howrah,Sreerampur
+Shyampur,Howrah,Sreerampur
+Bagnan,Howrah,Sreerampur
+Amta,Howrah,Sreerampur
+Udaynarayanpur,Howrah,Sreerampur
+Jagatballavpur,Howrah,Hooghly
+Domjur,Howrah,Hooghly
+Uttarpara,Hooghly,Hooghly
+Sreerampur,Hooghly,Hooghly
+Champdani,Hooghly,Hooghly
+Singur,Hooghly,Arambag
+Chandannagar,Hooghly,Arambag
+Chunchura,Hooghly,Arambag
+Balagarh,Hooghly,Arambag
+Pandua,Hooghly,Arambag
+Saptagram,Hooghly,Arambag
+Chanditala,Hooghly,Hooghly
+Jangipara,Hooghly,Hooghly
+Haripal,Hooghly,Tamluk
+Dhanekhali,Hooghly,Tamluk
+Tarakeswar,Hooghly,Tamluk
+Pursurah,Hooghly,Tamluk
+Arambag,Hooghly,Tamluk
+Goghat,Hooghly,Tamluk
+Khanakul,Hooghly,Tamluk
+Tamluk,Purba Medinipur,Kanthi
+Panskura Purba,Purba Medinipur,Kanthi
+Panskura Paschim,Purba Medinipur,Kanthi
+Moyna,Purba Medinipur,Kanthi
+Nandakumar,Purba Medinipur,Kanthi
+Mahisadal,Purba Medinipur,Kanthi
+Haldia,Purba Medinipur,Kanthi
+Nandigram,Purba Medinipur,Kanthi
+Chandipur,Purba Medinipur,Ghatal
+Patashpur,Purba Medinipur,Ghatal
+Kanthi Uttar,Purba Medinipur,Ghatal
+Bhagabanpur,Purba Medinipur,Ghatal
+Khejuri,Purba Medinipur,Ghatal
+Kanthi Dakshin,Purba Medinipur,Ghatal
+Ramnagar, Purba Medinipur,Purba Medinipur,Ghatal
+Egra,Purba Medinipur,Purulia
+Dantan,Paschim Medinipur,Purulia
+Nayagram,Paschim Medinipur,Medinipur
+Gopiballavpur,Paschim Medinipur,Medinipur
+Jhargram,Paschim Medinipur,Medinipur
+Keshiary,Paschim Medinipur,Purulia
+Kharagpur Sadar,Paschim Medinipur,Purulia
+Narayangarh,Paschim Medinipur,Purulia
+Sabang,Paschim Medinipur,Jhargram
+Pingla,Paschim Medinipur,Jhargram
+Kharagpur,Paschim Medinipur,Purulia
+Debra,Paschim Medinipur,Jhargram
+Daspur,Paschim Medinipur,Jhargram
+Ghatal,Paschim Medinipur,Jhargram
+Chandrakona,Paschim Medinipur,Jhargram
+Garbeta,Paschim Medinipur,Medinipur
+Salboni,Paschim Medinipur,Medinipur
+Keshpur,Paschim Medinipur,Jhargram
+Medinipur,Paschim Medinipur,Purulia
+Binpur,Paschim Medinipur,Medinipur
+Bandwan,Purulia,Medinipur
+Balarampur, Purulia,Purulia,Medinipur
+Baghmundi,Purulia,Bankura
+Joypur, Purulia,Purulia,Bankura
+Purulia,Purulia,Bankura
+Manbazar,Purulia,Bankura
+Kashipur,Purulia,Bankura
+Para,Purulia,Bankura
+Raghunathpur, Purulia,Purulia,Bankura
+Saltora,Bankura,Bishnupur
+Chhatna,Bankura,Bishnupur
+Ranibandh,Bankura,Bishnupur
+Raipur, Bankura,Bankura,Bishnupur
+Taldangra,Bankura,Bishnupur
+Bankura,Bankura,Bishnupur
+Barjora,Bankura,Bardhaman Purba
+Onda,Bankura,Bardhaman Purba
+Bishnupur, Bankura,Bankura,Bardhaman Purba
+Katulpur,Bankura,Bardhaman Purba
+Indas,Bankura,Bardhaman Purba
+Sonamukhi,Bankura,Bardhaman Purba
+Khandaghosh,Bardhaman,Bardhaman Purba
+Bardhaman Dakshin,Bardhaman,Asansol
+Raina,Bardhaman,Bardhaman-Durgapur
+Jamalpur,Bardhaman,Bardhaman-Durgapur
+Manteswar,Bardhaman,Bardhaman-Durgapur
+Kalna,Bardhaman,Bardhaman-Durgapur
+Memari,Bardhaman,Bardhaman-Durgapur
+Bardhaman Uttar,Bardhaman,Asansol
+Bhatar,Bardhaman,Asansol
+Purbasthali Dakshin,Bardhaman,Bardhaman-Durgapur
+Purbasthali Uttar,Bardhaman,Bardhaman-Durgapur
+Katwa,Bardhaman,Bardhaman-Durgapur
+Ketugram,Bardhaman,Birbhum
+Mangalkot,Bardhaman,Birbhum
+Ausgram,Bardhaman,Birbhum
+Galsi,Bardhaman,Asansol
+Pandaveswar,Bardhaman,Asansol
+Durgapur Purba,Bardhaman,Asansol
+Durgapur Paschim,Bardhaman,Asansol
+Raniganj,Bardhaman,Bolpur
+Jamuria,Bardhaman,Bolpur
+Asansol Dakshin,Bardhaman,Bolpur
+Asansol Uttar,Bardhaman,Bolpur
+Kulti,Bardhaman,Bolpur
+Barabani,Bardhaman,Bolpur
+Dubrajpur,Birbhum,Bolpur
+Suri,Birbhum,Bolpur
+Bolpur,Birbhum,Birbhum
+Nanoor,Birbhum,Birbhum
+Labpur,Birbhum,Birbhum
+Sainthia,Birbhum,Birbhum
+Mayureswar,Birbhum,Birbhum
+Rampurhat,Birbhum,Birbhum
+Hansan,Birbhum,Birbhum
+Nalhati,Birbhum,Birbhum
+Murarai,Birbhum,Birbhum

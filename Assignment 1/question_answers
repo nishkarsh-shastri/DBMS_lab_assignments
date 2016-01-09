@@ -1,0 +1,260 @@
+Movies, play_in table are given in the database.
+
+demo ) Find the total number of distinct actors in the movies
+
+Ans. 
+
+SELECT COUNT(DISTINCT name) FROM play_in;
++----------------------+
+| COUNT(DISTINCT name) |
++----------------------+
+|                    9 |
++----------------------+
+
+
+
+demo ) Among all the movies rated atleast 20,000 times select top-5 movies based on the average rating (in descending order of the rating received).
+
+Ans.
+
+SELECT title FROM movies WHERE num_ratings>20000 ORDER BY rating DESC;
+
++--------+
+| title  |
++--------+
+| PK     |
+| Sholay |
+| Queen  |
+| Lagaan |
++--------+
+
+demo ) Which movie has employed the largest number of actors? If there are more than one such movies. output the result in ascending order of the mid.
+Ans.
+SELECT movies.mid, movies.title 
+FROM movies, play_in 
+WHERE movies.mid = play_in.mid 
+GROUP BY movies.mid 
+HAVING COUNT(DISTINCT name)=(SELECT MAX(cast_position) FROM play_in)
+ORDER BY MID ASC;
+
++------+--------+
+| mid  | title  |
++------+--------+
+| 1013 | Sholay |
++------+--------+
+1 row in set (0.00 sec)
+
+
+2.1) Return the total number of active actors in the dataset ( who have done a movie in or after 2005)
+Ans.
+
+SELECT COUNT(DISTINCT play_in.name)
+FROM movies, play_in
+WHERE movies.year >=2005 AND movies.mid=play_in.mid;
+
++------------------------------+
+| COUNT(DISTINCT play_in.name) |
++------------------------------+
+|                            5 |
++------------------------------+
+
+(alternate) Check it again
+
+SELECT COUNT(DISTINCT play_in.name) 
+FROM play_in
+INNER JOIN movies
+ON movies.mid=play_in.mid
+WHERE movies.year>=2005;
+
+2.2) Return all the actors who have done at least one movie with Rani Mukherjee.(in alphabetic order)
+Ans.
+
+SELECT name 
+From play_in
+WHERE name!='Rani Mukherjee' 
+AND mid IN(
+	SELECT mid 
+	FROM play_in WHERE name = 'Rani Mukherjee'
+	) ORDER BY name ASC;
+
++-----------------+
+| name            |
++-----------------+
+| Aamir Khan      |
+| Amitabh Bachhan |
++-----------------+
+
+2.3) Rate the actors according to the gross ratings their moveis received. If there is a tie, resolve it alphabetically. For example. if Amir Khan worked in 5 movies with rating 7,4,10,6 and 9, then his gross rating is 36.
+
+SELECT play_in.name,sum(rating)
+FROM play_in
+INNER JOIN movies
+ON movies.mid = play_in.mid
+GROUP BY play_in.name
+ORDER BY sum(rating) DESC, play_in.name ASC;
+
+ +-----------------+-------------+
+| name            | sum(rating) |
++-----------------+-------------+
+| Amitabh Bachhan |        24.3 |
+| Aamir Khan      |        23.7 |
+| Hema Malini     |        16.0 |
+| Rani Mukherjee  |        15.0 |
+| Dharmendra      |         8.6 |
+| Sanjeev Kumar   |         8.6 |
+| Kangana Ranaut  |         8.5 |
+| Rajkumar Rao    |         8.5 |
++-----------------+-------------+
+
+
+2.4) Find the actor who has acted in more movies in 2005 than in any other year in his year.
+
+SELECT name 
+FROM movies NATURAL JOIN play_in
+AS A
+WHERE year = 2005
+GROUP BY name 
+HAVING COUNT(DISTINCT mid) > all(
+	SELECT COUNT(DISTINCT MID)
+	FROM movies NATURAL JOIN play_in 
+	AS B
+	WHERE year != 2005 
+	GROUP BY name 
+	HAVING B.name = A.name
+	);
+
++----------------+
+| name           |
++----------------+
+| Rani Mukherjee |
++----------------+
+
+2.5) 
+
+query 1 -> 
+CREATE view V 
+AS SELECT * FROM movies NATURAL JOIN play_in;
+
+query 2 ->
+
+SELECT DISTINCT (p.name) 
+FROM V p, V q, V r  
+WHERE
+(
+	p.name = q.name 
+	AND q.name = r.name 
+	AND p.mid != q.mid
+	AND q.mid != r.mid
+	AND r.mid!=p.mid
+	AND p.rating = q.rating
+	AND q.rating = r.rating
+	AND p.year < q.year
+	AND q.year < r.year
+)
+AND NOT EXISTS
+(
+	SELECT * FROM V x 
+	WHERE  p.year < x.year 
+	AND x.year < r.year
+	AND x.name = p.name
+	AND x.rating != p.rating 
+);
+
+Added couple of aamir khan movies having the same rating to check the same.
+
+result
++------------+
+| name       |
++------------+
+| Aamir Khan |
++------------+
+
+
+Question 3.
+
+Table creation
+* aircraft
+
+CREATE TABLE aircraft(
+ aid INT(4),
+ aname VARCHAR(30),
+ cruisingrange INTEGER,
+ CONSTRAINT PRIMARY KEY a_pk(aid) 
+ );
+
+* pilot
+
+CREATE TABLE pilot(
+ pid INT(4),
+ pname VARCHAR(30),
+ salary INTEGER,
+ CONSTRAINT PRIMARY KEY p_pk(pid) 
+ );
+
+* certified
+
+CREATE TABLE certified(
+ aid INT(4),
+ pid INT(4),
+ CONSTRAINT PRIMARY KEY p_pk(aid,pid), FOREIGN KEY (aid) REFERENCES aircraft(aid), FOREIGN KEY (pid) REFERENCES pilot(pid)
+ );
+
+Queries
+
+3.1) 
+SELECT aname 
+FROM aircraft 
+NATURAL JOIN certified 
+NATURAL JOIN pilot 
+GROUP BY aid 
+HAVING min(salary)>20;
++----------------+
+| aname          |
++----------------+
+| BOMBARDIER-700 |
++----------------+
+
+3.2) 
+SELECT aname,avg(salary) 
+FROM aircraft 
+NATURAL JOIN certified 
+NATURAL JOIN pilot 
+WHERE cruisingrange>15000 
+GROUP BY aid;
+
++-------------+-------------+
+| aname       | avg(salary) |
++-------------+-------------+
+| BOEING-747  |     25.0000 |
+| BOEING-707  |     22.5000 |
+| AIRBUS-A340 |     20.0000 |
+| AIRBUS-A380 |     12.5000 |
++-------------+-------------+
+
+3.3)
+SELECT DISTINCT pid,pname 
+FROM aircraft 
+NATURAL JOIN certified 
+NATURAL JOIN pilot 
+WHERE cruisingrange>15000 
+AND aname !='BOEING-747' 
+AND aname !='BOEING-707'
+AND pid NOT IN(SELECT pid FROM aircraft NATURAL JOIN certified NATURAL JOIN pilot where aname='BOEING-707' OR aname = 'BOEING-747');
+
++-------+
+| pname |
++-------+
+| DAVID |
+| BRUCE |
++-------+
+
+
+Rough work
+
+
+Some trial for 2.5)
+
+ SELECT name as n,rating as R ,min(year) as m ,max(year) as l ,count(*) from movies natural join play_in group by name,rating having count(*)>=3 AND play_in.name not in(select name from movies natural join play_in where rating!=R and name=n and year>=m and year<=l);
+
+
+ SELECT name as n,rating as R ,min(year) as m ,max(year) as l ,count(*) from movies natural join play_in group by name,rating having count(*)>=3 AND play_in.name not in(select name from movies natural join play_in where rating!=R and name=n and year>(select min(year) from movies natural join play_in group by name,rating having rating=R and name =n) and year<(select max(year) from movies natural join play_in group by name,rating having rating=R and name =n));

@@ -1,0 +1,70 @@
+mysql> select * from FACULTY
+    -> ;
++------+--------------+------+------------+
+| EC   | Name         | Dept | Dob        |
++------+--------------+------+------------+
+| 1001 | BRYANT R.    | CSE  | 1975-01-28 |
+| 1002 | GIBBONS P.   | CSE  | 1979-02-15 |
+| 1003 | MANKOFF J.   | MECH | 1972-02-07 |
+| 1004 | ROHDE G.     | ECE  | 1976-12-28 |
+| 1005 | MILLER G.    | CSE  | 1970-11-25 |
+| 1006 | KINGSFORD C. | EE   | 1968-05-21 |
+| 1007 | BELLOCH G.   | EE   | 1980-03-03 |
+| 1008 | DANENBERG R. | ECE  | 1972-04-16 |
+| 1009 | PAVLO A.     | MECH | 1965-01-02 |
+| 1010 | GARLAN D.    | CSE  | 1980-05-16 |
++------+--------------+------+------------+
+
+
+mysql> select * from PROJECT
+    -> ;
++------+------+-------------------------------+------------+------+---------+
+| Code | Type | Title                         | Value      | PI   | Sponsor |
++------+------+-------------------------------+------------+------+---------+
+| BBDP | S    | BLACK BODY RADIATION          | 6000000.00 | 1007 | BHL     |
+| BHSM | S    | BRIDGE HEALTH MONIROTING      | 4000000.00 | 1004 | RLY     |
+| DCA1 | C    | SELF DRIVING CAR              |  500000.00 | 1003 | GIL     |
+| IALO | C    | INDUSTRIAL AUTOMATION         |  200000.00 | 1003 | BHL     |
+| LPDC | S    | LOW POWER CIRCUITS            | 3000000.00 | 1006 | DMI     |
+| OCDE | C    | OPERATIONS RESEARCH           |  800000.00 | 1009 | HII     |
+| SACP | S    | SIDE CHANNEL ATTACKS          | 5000000.00 | 1002 | DMI     |
+| SRC1 | S    | SOLID STATE DEVICES           | 8000000.00 | 1008 | HAL     |
+| VSS1 | S    | VALIDATION OF CONTROL SYSTEMS | 2000000.00 | 1001 | RLY     |
++------+------+-------------------------------+------------+------+---------+
+
+
+INVESTIGATOR
++------+------+
+| Code | EC   |
++------+------+
+| VSS1 | 1001 |
+| VSS1 | 1002 |
+| SACP | 1002 |
+| SACP | 1010 |
+| IALO | 1003 |
+| IALO | 1007 |
+| OCDE | 1009 |
+| BBDP | 1007 |
+| SRC1 | 1008 |
+| SRC1 | 1001 |
+| LPDC | 1006 |
+| LPDC | 1010 |
+| DCA1 | 1003 |
+| BHSM | 1004 |
+| BHSM | 1001 |
++------+------+
+
+STAFF
++------+------------------+------+------------+--------+
+| EC   | Name             | Code | Dob        | Salary |
++------+------------------+------+------------+--------+
+| 2001 | ROBBIE KEANE     | VSS1 | 1990-05-16 |  18000 |
+| 2002 | ANSUMAN BANERJEE | VSS1 | 1985-05-21 |  18000 |
+| 2003 | OMAR GONZALEZ    | SACP | 1989-04-16 |  20000 |
+| 2004 | ALAN GORDON      | IALO | 1989-05-03 |  20000 |
+| 2005 | ROBBIE KEANE     | IALO | 1988-01-16 |  18000 |
+| 2006 | CHANDLER HOFFMAN | BBDP | 1988-07-17 |  22000 |
+| 2007 | PAUL POGBA       | BHSM | 1990-08-16 |  18000 |
+| 2008 | SHINJI KAGAWA    | LPDC | 1991-01-20 |  18000 |
++------+------------------+------+------------+--------+
+

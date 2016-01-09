@@ -1,0 +1,281 @@
+
+-- Identity
+CREATE TABLE Identity (
+PICno VARCHAR(20),	
+PICtype VARCHAR(10) NOT NULL,
+PIC BLOB,
+PRIMARY KEY (PICno),
+CHECK(PICtype in ('BIRTH','PAN','DRIVING','AADHAR')));
+
+-- Address
+CREATE TABLE Address (
+PIN INT NOT NULL,
+PO VARCHAR(20) NOT NULL,
+Town VARCHAR(50) NOT NULL,
+District VARCHAR(50) NOT NULL,
+State VARCHAR(50) NOT NULL,
+ACno Char(10),
+PRIMARY KEY ad_pk (town,PIN),
+FOREIGN KEY ad_fk(Acno) REFERENCES Constituency(Acno));
+
+-- Polling
+CREATE TABLE Polling (
+Partno CHAR(11),
+Acno Char(10) NOT NULL,
+PRIMARY KEY po_pk (Partno),
+CONSTRAINT FOREIGN KEY po_fk (Acno) REFERENCES Constituency(Acno));
+
+-- Constituency
+CREATE TABLE Constituency (
+Acno Char(10),
+Acname VARCHAR(50) NOT NULL,
+Population INT,
+PCno VARCHAR(10),
+PRIMARY KEY c_pk (Acno),
+CONSTRAINT FOREIGN KEY c_fk(PCno) REFERENCES Parliamentary_Constituency(PCno));
+
+-- Parliamentary Constituency
+
+CREATE TABLE Parliamentary_Constituency
+(
+	PCno VARCHAR(10),
+	PCName VARCHAR(50) NOT NULL,
+	State VARCHAR(50) NOT NULL,
+	PRIMARY KEY(PCno)
+);
+
+-- District mapping --
+CREATE TABLE District_Constituency
+(
+	District VARCHAR(50),
+	Acno Char(10),
+	PRIMARY KEY(District,Acno),
+	FOREIGN KEY dc_fk(Acno) REFERENCES Constituency(Acno)
+);
+
+
+-- Election
+CREATE TABLE Election (
+Electionid VARCHAR(10),
+year INT NOT NULL,
+PRIMARY KEY e_pk (Electionid),
+CONSTRAINT ls_ck CHECK(year > 1946));
+
+-- Voter Table
+CREATE TABLE Voter (
+Voterid CHAR(10),
+Name VARCHAR(50) NOT NULL,
+Age INT NOT NULL,
+Gender VARCHAR(6) NOT NULL,
+DOB date NOT NULL,
+DOI date,
+DOA date NULL,
+emailID VARCHAR(60) NULL,
+Phoneno INTEGER NULL,
+PICno VARCHAR(20),
+Houseno INTEGER NOT NULL,
+Streetno VARCHAR(20) NOT NULL,
+Town VARCHAR(50) NOT NULL,
+PIN INT NOT NULL,
+Caste VARCHAR(3) NOT NULL,
+Partno CHAR(11) NOT NULL,
+PRIMARY KEY v_pk (Voterid),
+CONSTRAINT vt_ck1 CHECK(Age >= 18),
+CONSTRAINT  vt_ck2 CHECK(Gender in ('male','female')),
+UNIQUE KEY v_uk (PICno),
+FOREIGN KEY v_fk1 (Town,PIN) REFERENCES Address(Town,PIN),
+CHECK (Caste in ('GEN','OBC','SC','ST')),
+FOREIGN KEY v_fk2(Partno) REFERENCES Polling(Partno));
+
+-- Party
+CREATE TABLE Party (
+Partyid CHAR(10),
+PartyName VARCHAR(50) NOT NULL,
+Symbol BLOB,
+Type VARCHAR(10) NOT NULL,
+PRIMARY KEY pa_pk (Partyid),
+CHECK (Type in ('National','Regional')));
+
+CREATE TABLE Party_Candidate(
+Partyid CHAR(10),
+Voterid CHAR(10),
+PRIMARY KEY pa_pk (Partyid,Voterid));
+
+-- Candidate
+CREATE TABLE Candidate (
+Candidateid CHAR(10),
+Voterid CHAR(10) NOT NULL,
+Acno Char(10) NOT NULL,
+Type VARCHAR(3) NOT NULL,
+Partyid CHAR(10),
+PRIMARY KEY ca_pk (Candidateid),
+FOREIGN KEY ca_fk1 (Voterid) REFERENCES Voter(Voterid),
+FOREIGN KEY ca_fk2 (ACno) REFERENCES Constituency(Acno),
+CHECK (Type in ('MLA','MP')),
+FOREIGN KEY ca_fk3 (Partyid) REFERENCES Party(Partyid));
+
+-- Statistics
+CREATE TABLE Election_Statistics (
+Electionid VARCHAR(10) NOT NULL,
+Partyid CHAR(10) NOT NULL,
+STVotes INT,
+SCVotes INT,
+OBCVotes INT,
+GENVotes INT,
+FemaleVotes INT,
+MaleVotes INT,
+PRIMARY KEY st_pk (Electionid,Partyid),
+FOREIGN KEY st_fk1 (Electionid) REFERENCES Election(Electionid),
+FOREIGN KEY st_fk2 (Partyid) REFERENCES Party(Partyid));
+
+-- Relation
+CREATE TABLE Relation (
+Voterid CHAR(10) NOT NULL,
+Relationvoterid CHAR(10) NOT NULL,
+Relation VARCHAR(10) NOT NULL,
+PRIMARY KEY re_pk (Voterid,Relationvoterid),
+CHECK (Relation in ('Father','Mother','Brother','Sister','Spouse')));
+
+
+
+
+-- queries
+
+--- First insertion in to the table of voter ---
+-- Sample data - 
+
+VoterId:SystemGeneratedUniqueId
+Name: Rahul
+Age : 21
+Gender: Male
+DOB: 1/04/1994
+DOI: ---------
+DOA: 24/03/15
+emailId -- iamgurnani@gmail.com
+phoneNumber: 9999999999
+PICNo: urlhere
+HouseNo: 12
+Street:  Deen Dayal
+Pin : 721087
+Caste: General
+Partno: SystemGeneratedUniquePartNo
+
+
+
+INSERT INTO Voter VALUES(SystemGeneratedUniqueId,Rahul,21,Male,1/04/1994,NULL,24/03/15,iamgurnani@gmail.com,9999999999,urlhere,12,Deen Dayal,721087,General,SystemGeneratedUniquePartNo)
+--- Suggestion based on pincode P ---
+Select * from Address Where Pincode = p;
+-- Suggestion based on town t---
+select * from Address where Town = t;
+select * from Constituency where Partno = SystemGeneratedUniquePartNo
+--- Query used to insert values into the relation table -----
+INSERT INTO Relation VALUES(SystemGeneratedUniqueId,VoterInsertedRelationvoterid,RelationType) 
+-- When voter wants to get information about his application status with voterid = V ----
+SELECT * FROM VOTER WHERE Voterid=V
+SELECT * FROM Relation WHERE VoterId=V
+SELECT * FROM Constituency where Partno = PartnoAssociatedWithVoterId
+-- Controlled access to the database of other voters -----
+-- these queries are allowed to be seen by other voters
+SELECT doi from Voter where Voterid = v;
+SELECT COUNT(*) FROM Voter where Town = t;
+SELECT COUNT(*) FROM Address where Pincode=p;
+SELECT COUNT(*) FROM Address where State=s;
+SELECT COUNT(*) FROM Address where District=d;
+SELECT Population FROM Constituency where Acno = a;
+SELECT SUM(Population) FROM Constituency INNER JOIN Parliamentary_Constituency ON Constituency.PCno = Parliamentary_Constituency.PCno where PCno=p;
+SELECT * FROM Candidate where ACno = Acno;
+SELECT CandidateId,Acname FROM Candidate INNER JOIN Constituency ON Candidate.ACno = Constituency.Acno 
+-------------------------- CANDIDATE INFORMATION -------------------------------
+-- Application of candidate ---
+INSERT INTO Candidate VALUES(SystemGeneratedCandidateId,VoterId,ACno,Type,Partyid)
+-- Check his name from party supplied list
+SELECT * FROM Party_Candidate WHERE Voterid = v
+SELECT * FROM Party_Candidate WHERE Partyid = p;
+-- Information Accessible to the candidate which can contain the townwise distribution of voters --
+SELECT COUNT(*) FROM Voter where Town = t;
+SELECT COUNT(*) FROM Address where Pincode=p;
+SELECT COUNT(*) FROM Address where State=s;
+SELECT COUNT(*) FROM Address where District=d;
+SELECT Population FROM Constituency where Acno = a;
+SELECT SUM(Population) FROM Constituency INNER JOIN Parliamentary_Constituency ON Constituency.PCno = Parliamentary_Constituency.PCno where PCno=p;
+--- Party related information ----
+SELECT * FROM Party WHERE Partyid = partyid;
+SELECT CandidateName,ACno FROM Candidate INNER JOIN Party ON Candidate.Partyid = Party.Partyid and Partyid = partyid;
+-- Other stats are just the variants of above mentioned queries like sum,avg etc.
+
+-- Townwise distribution of voters for a candidate ---
+-- Get the district name from the candidate
+SELECT COUNT(*) AS numberOfVoters FROM Voter Natural Join Address where District = d  GROUP BY Town
+-- Similarly other informations can be retrieved by using the group by command
+-- Election related information accessible to the candidate specified by the Electionection year --
+select ID from Election where year = y;
+select * from Statistics where Electionid = id;
+-- Then our software will handle how to show the statistical information
+----------------------------------Party Information -----------------------------------
+-- Insertion rule --
+INSERT INTO Party VALUES(SystemGeneratedPartyId,name,symbol_url,'regional');
+-- Inserting into the list of party candidates --
+INSERT INTO Party_Candidate VALUES(Partyid,CandidateVoterId)
+-- Some general distribution-- Note that they might evolve more based on added functionalities to the software.
+SELECT COUNT(*) as Distribution FROM Voter  Natural JOIN Address GROUP BY Acno ORDER BY Distribution;
+SELECT COUNT(*) as Distribution FROM Voter  Natural JOIN Address GROUP BY Acno,Town ORDER BY Distribution;
+SELECT COUNT(*) as Distribution FROM Voter  Natural JOIN Address GROUP BY Acno,District ORDER BY Distribution;
+SELECT SUM(Population) FROM Constituency INNER JOIN Parliamentary_Constituency ON Constituency.PCno = Parliamentary_Constituency.PCno GROUP BY Parliamentary_Constituency
+SELECT COUNT(*) FROM VOTER Natural JOIN Address where Acno = a and Caste = specifiedCaste
+-- Party related information
+SELECT * From Party where PartyId = pid
+select ID from Election where year = y;
+select * from Statistics where Electionid = id;
+
+			
+---------------------------------------- ECE Information ---------------------------------------------------
+
+-- Queries related to the voter --
+-- See the list of applied persons ---
+SELECT * FROM Voter WHERE DOI = NULL ORDER BY DOA DESC;
+-- Change the application status ---
+UPDATE VOTER SET DOI='dateToday' WHERE Voterid = v;
+
+DELETE FROM VOTER where Voterid = v;
+
+-- Queries related to the party --
+-- Constituency wise distribution--
+CREATE OR REPLACE VIEW V AS SELECT * FROM (CANDIDATE Natural JOIN Address) INNER JOIN Polling on Address.Acno = Polling.Acno
+SELECT Partyid,Partno,Count(*) AS numberOfCandidates FROM CANDIDATE Natural Join Party GROUP BY PartyId ORDER BY Partyid DESC;
+SELECT Partyid,Partno,Count(*) AS numberOfCandidates FROM CANDIDATE Natural Join Party GROUP BY PartyId ORDER BY Partyid DESC;
+SELECT PartyId,COUNT(Distinct State) as StatePresence from CANDIDATE Natural JOIN V GROUP BY PartyId;
+SELECT PartyId,COUNT(Distinct district) as DistrictPresence from CANDIDATE Natural JOIN V GROUP BY PartyId;
+UPDATE Party SET type='National' where Partyid = p;
+-- More queries can be alloted to the ECE as the need arises in the software
+
+DELETE FROM Party WHERE Partyid = P;
+DELETE FROM Party_Candidate WHERE Partyid = P
+
+-- Candidate Queries --
+
+SELECT * FROM Candidate;
+SELECT * FROM Candidate where Candidateid=c;
+SELECT COUNT(*) as NumeberOfCandidates FROM Candidate GROUP BY Partyid;
+SELECT COUNT(*) as numberOfCandidatesFromAnAssembly FROM Candidate GROUP BY Acno;
+SELECT COUNT(*) as NumeberOfCandidatesFromState FROM V GROUP BY State;
+SELECT COUNT(*) as NumeberOfCandidatesFromState FROM V GROUP BY State,Acno;
+DELETE FROM Candidate Where Candidateid=c;
+
+-- Similarly other queries can be extracted from the candidate information --
+
+-- Data population of constituencies --
+
+INSERT INTO Parliamentary_Constituency VALUES(PCno,PCName);
+
+INSERT INTO Constituency VALUES(Acno,Acname,Population,PCno);
+
+INSERT INTO Address VALUES(PINCODE,PO,Town,District,State,Acno);
+
+DELETE FROM Parliamentary_Constituency WHERE PCno = x;
+
+DELETE FROM Constituency VALUES WHERE Acno = x;
+
+
+
+
+

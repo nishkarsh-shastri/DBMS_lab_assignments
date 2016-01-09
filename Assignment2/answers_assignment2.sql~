@@ -1,0 +1,562 @@
+Ans a)
+
+CREATE TABLE FACULTY
+(
+	EC INTEGER,
+	Name VARCHAR(20),
+	Dept VARCHAR(4),
+	Dob DATE,
+	CONSTRAINT PRIMARY KEY fc_pk(EC)
+);
+
+CREATE TABLE PROJECT
+(
+	Code CHAR(4),
+	Type CHAR(1),
+	Title VARCHAR(50),
+	Value DECIMAL(12,2) CHECK(Value>=100000.00),
+	PI INTEGER,
+	Sponsor VARCHAR(10),
+	CONSTRAINT PRIMARY KEY pr_pk(Code),
+	FOREIGN KEY pr_fk1(PI) REFERENCES FACULTY(EC)
+	ON DELETE CASCADE
+);
+
+CREATE TABLE INVESTIGATOR
+(
+	Code CHAR(4),
+	EC 	INTEGER,
+	CONSTRAINT FOREIGN KEY in_fk1(Code) REFERENCES PROJECT(Code) ON DELETE SET NULL,
+	FOREIGN KEY in_fk2(EC) REFERENCES FACULTY(EC) ON DELETE CASCADE
+);
+
+
+CREATE TABLE STAFF
+(
+	EC INTEGER,
+	Name VARCHAR(20),
+	Code CHAR(4),
+	Dob DATE,
+	Salary INTEGER,
+	CONSTRAINT FOREIGN KEY st_fk(Code) REFERENCES PROJECT(Code) ON DELETE SET NULL
+);
+
+Ans b)
+
+1) 
+SELECT Code,Title,Value 
+FROM PROJECT 
+WHERE Type='C' 
+ORDER BY Value DESC;
+
++------+-----------------------+
+| Code | Title                 |
++------+-----------------------+
+| OCDE | OPERATIONS RESEARCH   |
+| DCA1 | SELF DRIVING CAR      |
+| IALO | INDUSTRIAL AUTOMATION |
++------+-----------------------+
+
+2) 
+SELECT Code, Title,Value
+FROM PROJECT
+WHERE Title LIKE '%VLSI%'
+ORDER BY Value ASC;
+
+Empty set
+
+3) 
+SELECT EC,Name,Dob,Dept 
+FROM FACULTY
+ORDER BY Dept,Dob;
+
++------+--------------+------------+------+
+| EC   | Name         | Dob        | Dept |
++------+--------------+------------+------+
+| 1005 | MILLER G.    | 1970-11-25 | CSE  |
+| 1001 | BRYANT R.    | 1975-01-28 | CSE  |
+| 1002 | GIBBONS P.   | 1979-02-15 | CSE  |
+| 1010 | GARLAN D.    | 1980-05-16 | CSE  |
+| 1008 | DANENBERG R. | 1972-04-16 | ECE  |
+| 1004 | ROHDE G.     | 1976-12-28 | ECE  |
+| 1006 | KINGSFORD C. | 1968-05-21 | EE   |
+| 1007 | BELLOCH G.   | 1980-03-03 | EE   |
+| 1009 | PAVLO A.     | 1965-01-02 | MECH |
+| 1003 | MANKOFF J.   | 1972-02-07 | MECH |
++------+--------------+------------+------+
+
+4) 
+SELECT * 
+FROM STAFF
+WHERE Dob > '1980-1-1'
+AND Dob < '1985-12-31'
+ORDER BY Name;
+
++------+------------------+------+------------+--------+
+| EC   | Name             | Code | Dob        | Salary |
++------+------------------+------+------------+--------+
+| 2002 | ANSUMAN BANERJEE | VSS1 | 1985-05-21 |  18000 |
++------+------------------+------+------------+--------+
+
+Ans c)
+1)
+SELECT COUNT(*) 
+FROM STAFF;
+
++----------+
+| COUNT(*) |
++----------+
+|        8 |
++----------+
+
+2)
+SELECT COUNT(*) 
+FROM FACULTY
+WHERE Dept = 'CSE' 
+OR Dept ='ECE' 
+OR Dept ='EE';
+
++----------+
+| COUNT(*) |
++----------+
+|        8 |
++----------+
+
+3)
+SELECT Code,COUNT(*) as number_of_staff
+FROM STAFF
+GROUP BY Code;
++------+-----------------+
+| Code | number_of_staff |
++------+-----------------+
+| BBDP |               1 |
+| BHSM |               1 |
+| IALO |               2 |
+| LPDC |               1 |
+| SACP |               1 |
+| VSS1 |               2 |
++------+-----------------+
+
+4)
+SELECT MAX(Salary),MIN(Salary),AVG(Salary)
+FROM STAFF 
+WHERE Code='MAFV';
+
++-------------+-------------+-------------+
+| MAX(Salary) | MIN(Salary) | AVG(Salary) |
++-------------+-------------+-------------+
+|        NULL |        NULL |        NULL |
++-------------+-------------+-------------+
+
+5)
+SELECT Sponsor,COUNT(*) as no_of_project, MAX(Value),MIN(Value),AVG(Value)
+FROM PROJECT
+GROUP BY Sponsor;
+
++---------+---------------+------------+------------+----------------+
+| Sponsor | no_of_project | MAX(Value) | MIN(Value) | AVG(Value)     |
++---------+---------------+------------+------------+----------------+
+| BHL     |             2 | 6000000.00 |  200000.00 | 3100000.000000 |
+| DMI     |             2 | 5000000.00 | 3000000.00 | 4000000.000000 |
+| GIL     |             1 |  500000.00 |  500000.00 |  500000.000000 |
+| HAL     |             1 | 8000000.00 | 8000000.00 | 8000000.000000 |
+| HII     |             1 |  800000.00 |  800000.00 |  800000.000000 |
+| RLY     |             2 | 4000000.00 | 2000000.00 | 3000000.000000 |
++---------+---------------+------------+------------+----------------+
+
+
+
+6)
+SELECT * ,COUNT(*) as cnt
+FROM STAFF
+GROUP BY Code
+HAVING cnt<3;
+
++------+------------------+------+------------+--------+-----+
+| EC   | Name             | Code | Dob        | Salary | cnt |
++------+------------------+------+------------+--------+-----+
+| 2006 | CHANDLER HOFFMAN | BBDP | 1988-07-17 |  22000 |   1 |
+| 2007 | PAUL POGBA       | BHSM | 1990-08-16 |  18000 |   1 |
+| 2004 | ALAN GORDON      | IALO | 1989-05-03 |  20000 |   2 |
+| 2008 | SHINJI KAGAWA    | LPDC | 1991-01-20 |  18000 |   1 |
+| 2003 | OMAR GONZALEZ    | SACP | 1989-04-16 |  20000 |   1 |
+| 2001 | ROBBIE KEANE     | VSS1 | 1990-05-16 |  18000 |   2 |
++------+------------------+------+------------+--------+-----+
+
+7)
+
+SELECT * 
+FROM PROJECT
+ORDER BY Value DESC
+LIMIT 5;
+
++------+------+--------------------------+------------+------+---------+
+| Code | Type | Title                    | Value      | PI   | Sponsor |
++------+------+--------------------------+------------+------+---------+
+| SRC1 | S    | SOLID STATE DEVICES      | 8000000.00 | 1008 | HAL     |
+| BBDP | S    | BLACK BODY RADIATION     | 6000000.00 | 1007 | BHL     |
+| SACP | S    | SIDE CHANNEL ATTACKS     | 5000000.00 | 1002 | DMI     |
+| BHSM | S    | BRIDGE HEALTH MONIROTING | 4000000.00 | 1004 | RLY     |
+| LPDC | S    | LOW POWER CIRCUITS       | 3000000.00 | 1006 | DMI     |
++------+------+--------------------------+------------+------+---------+
+
+8)
+
+SELECT * FROM STAFF
+WHERE Salary > (SELECT AVG(Salary) FROM STAFF);
+
++------+------------------+------+------------+--------+
+| EC   | Name             | Code | Dob        | Salary |
++------+------------------+------+------------+--------+
+| 2003 | OMAR GONZALEZ    | SACP | 1989-04-16 |  20000 |
+| 2004 | ALAN GORDON      | IALO | 1989-05-03 |  20000 |
+| 2006 | CHANDLER HOFFMAN | BBDP | 1988-07-17 |  22000 |
++------+------------------+------+------------+--------+
+
+Ans d)
+
+1)
+SELECT Title 
+FROM PROJECT
+INNER JOIN FACULTY
+ON PROJECT.PI = FACULTY.EC
+WHERE FACULTY.Dept = 'CSE';
++-------------------------------+
+| Title                         |
++-------------------------------+
+| SIDE CHANNEL ATTACKS          |
+| VALIDATION OF CONTROL SYSTEMS |
++-------------------------------+
+
+2)
+
+SELECT * 
+FROM STAFF
+WHERE Code IN (SELECT Code
+FROM PROJECT
+INNER JOIN FACULTY
+ON PROJECT.PI = FACULTY.EC
+WHERE FACULTY.Dept = 'CSE');
+
++------+------------------+------+------------+--------+
+| EC   | Name             | Code | Dob        | Salary |
++------+------------------+------+------------+--------+
+| 2001 | ROBBIE KEANE     | VSS1 | 1990-05-16 |  18000 |
+| 2002 | ANSUMAN BANERJEE | VSS1 | 1985-05-21 |  18000 |
+| 2003 | OMAR GONZALEZ    | SACP | 1989-04-16 |  20000 |
++------+------------------+------+------------+--------+
+
+3) 
+SELECT FACULTY.Name,FACULTY.EC,FACULTY.Dob
+FROM INVESTIGATOR
+NATURAL JOIN
+PROJECT
+NATURAL JOIN
+FACULTY
+WHERE PROJECT.Title LIKE '%VLSI%';
+; 	
+
+Empty Set
+
+4)
+
+
+SELECT Name, Type 
+FROM 
+(PROJECT NATURAL JOIN INVESTIGATOR) 
+NATURAL RIGHT OUTER JOIN FACULTY
+WHERE Type IS NOT NULL
+UNION
+(SELECT Name,Type  
+FROM (PROJECT NATURAL JOIN INVESTIGATOR) 
+NATURAL RIGHT OUTER JOIN FACULTY
+WHERE Type is NULL)
+UNION ALL
+(
+SELECT DISTINCT Name, 'Both' AS Type 
+FROM 
+(PROJECT NATURAL JOIN INVESTIGATOR) 
+NATURAL RIGHT OUTER JOIN FACULTY
+WHERE Name IN
+(SELECT Name 
+FROM (PROJECT NATURAL JOIN INVESTIGATOR) 
+NATURAL RIGHT OUTER JOIN FACULTY WHERE Type = 'S') 
+AND 
+Name IN
+(
+SELECT Name 
+FROM (PROJECT NATURAL JOIN INVESTIGATOR) 
+NATURAL RIGHT OUTER JOIN FACULTY where Type = 'C')
+) 
+order by Type;
+
++--------------+------+
+| Name         | Type |
++--------------+------+
+| MILLER G.    | NULL |
+| BELLOCH G.   | Both |
+| MANKOFF J.   | C    |
+| BELLOCH G.   | C    |
+| PAVLO A.     | C    |
+| GARLAN D.    | S    |
+| BELLOCH G.   | S    |
+| DANENBERG R. | S    |
+| BRYANT R.    | S    |
+| KINGSFORD C. | S    |
+| GIBBONS P.   | S    |
+| ROHDE G.     | S    |
++--------------+------+
+
+
+5)
+SELECT STAFF.Name 
+FROM STAFF
+WHERE STAFF.Code = (SELECT Code FROM STAFF WHERE Name = 'ANSUMAN BANERJEE')
+AND Name != 'ANSUMAN BANERJEE';
+
++--------------+
+| Name         |
++--------------+
+| ROBBIE KEANE |
++--------------+
+
+Ans e)
+
+1) --------CHECK IT -----------
+SELECT Distinct Name 
+FROM FACULTY NATURAL JOIN INVESTIGATOR
+WHERE Code IN(SELECT PROJECT.Code FROM PROJECT 
+	WHERE Type = 'S') 
+AND Name NOT IN
+(
+	SELECT Name FROM PROJECT NATURAL JOIN INVESTIGATOR NATURAL JOIN FACULTY
+	WHERE Type = 'C'
+);
+
++--------------+
+| Name         |
++--------------+
+| BRYANT R.    |
+| GIBBONS P.   |
+| GARLAN D.    |
+| DANENBERG R. |
+| KINGSFORD C. |
+| ROHDE G.     |
++--------------+
+
+Alternate
+
+SELECT Distinct Name 
+FROM STAFF
+WHERE STAFF.Code IN(SELECT PROJECT.Code FROM PROJECT 
+	WHERE Type = 'S'
+)
+EXCEPT
+SELECT Distinct Name 
+FROM STAFF
+WHERE STAFF.Code IN
+(
+	SELECT PROJECT.Code FROM PROJECT 
+	WHERE Type = 'C'
+);
+
+2)
+
+SELECT Distinct FACULTY.Name
+FROM FACULTY
+INNER JOIN INVESTIGATOR
+ON FACULTY.EC = INVESTIGATOR.EC
+INNER JOIN PROJECT
+ON INVESTIGATOR.Code = PROJECT.Code
+WHERE PROJECT.Type ='S'
+AND FACULTY.Name IN
+(
+	SELECT Distinct FACULTY.Name
+	FROM FACULTY
+	INNER JOIN INVESTIGATOR
+	ON FACULTY.EC = INVESTIGATOR.EC
+	INNER JOIN PROJECT
+	ON INVESTIGATOR.Code = PROJECT.Code
+	WHERE PROJECT.Type ='C'
+);
+
++------------+
+| Name       |
++------------+
+| BELLOCH G. |
++------------+
+
+Alternate
+
+SELECT Distinct FACULTY.Name
+FROM FACULTY
+INNER JOIN INVESTIGATOR
+ON FACULTY.EC = INVESTIGATOR.EC
+INNER JOIN PROJECT
+ON INVESTIGATOR.Code = PROJECT.Code
+WHERE PROJECT.Type ='S'
+INTERSECT
+SELECT Distinct FACULTY.Name
+FROM FACULTY
+INNER JOIN INVESTIGATOR
+ON FACULTY.EC = INVESTIGATOR.EC
+INNER JOIN PROJECT
+ON INVESTIGATOR.Code = PROJECT.Code
+WHERE PROJECT.Type ='C'
+
+3)
+SELECT Distinct FACULTY.Name
+FROM FACULTY
+INNER JOIN INVESTIGATOR
+ON FACULTY.EC = INVESTIGATOR.EC
+INNER JOIN PROJECT
+ON INVESTIGATOR.Code = PROJECT.Code
+WHERE PROJECT.Sponsor ='INTEL'
+UNION
+SELECT Distinct STAFF.Name
+FROM STAFF
+INNER JOIN PROJECT
+ON STAFF.Code = PROJECT.Code
+WHERE PROJECT.Sponsor='INTEL';
+
+Ans f)
+
+1)
+SELECT Sponsor, COUNT(Distinct Dept) as cnt
+FROM PROJECT
+INNER JOIN FACULTY
+ON PROJECT.PI = FACULTY.EC
+GROUP By Sponsor
+HAVING
+(select count(Distinct Dept) from FACULTY) = cnt;
+
+Empty Set;
+
+2)
+SELECT * FROM PROJECT
+WHERE PROJECT.PI = (
+SELECT EC 
+from FACULTY 
+where Dob = (
+SELECT MAX(Dob) FROM FACULTY
+)
+)
+
+Empty Set
+
+3)
+SELECT Distinct Dept from FACULTY
+WHERE EC NOT IN(
+SELECT PI FROM PROJECT WHERE Type = 'C');
+
++------+
+| Dept |
++------+
+| CSE  |
+| ECE  |
+| EE   |
++------+
+
+
+4)
+SELECT Dept,SUM(Value) 
+FROM FACULTY
+INNER JOIN PROJECT
+ON PROJECT.PI = FACULTY.EC
+GROUP BY Dept
+ORDER BY SUM(Value) DESC
+LIMIT 1;
+
++------+-------------+
+| Dept | SUM(Value)  |
++------+-------------+
+| ECE  | 12000000.00 |
++------+-------------+
+
+5)
+SELECT * 
+FROM FACULTY
+WHERE EC not IN (SELECT EC FROM INVESTIGATOR);
++------+-----------+------+------------+
+| EC   | Name      | Dept | Dob        |
++------+-----------+------+------------+
+| 1005 | MILLER G. | CSE  | 1970-11-25 |
++------+-----------+------+------------+
+
+6)
+
+SELECT Title,count(*) AS cnt, Dept AS dpt 
+FROM V 
+GROUP BY Code, Dept
+HAVING cnt = (
+	SELECT COUNT(*) 
+	FROM FACULTY 
+	WHERE Dept=dpt
+	);
+
+Empty Set
+
+7)
+query 1)
+
+CREATE VIEW V 
+AS SELECT * 
+FROM 
+(PROJECT NATURAL JOIN INVESTIGATOR) 
+NATURAL JOIN FACULTY;
+
+7.
+
+SELECT DISTINCT Fac.Dept 
+AS Dep FROM 
+(
+SELECT EC as ec,Dept AS DEPT,Dob FROM FACULTY AS B 
+WHERE Dob = 
+(
+SELECT min(Dob) 
+FROM FACULTY 
+WHERE Dept=B.Dept)
+) AS Fac WHERE 
+(
+SELECT count(Code) 
+FROM INVESTIGATOR 
+WHERE ec = Fac.EC
+) >= ALL(SELECT Count(Code) 
+FROM FACULTY 
+NATURAL JOIN INVESTIGATOR 
+WHERE ec != Fac.EC 
+AND FACULTY.Dept=Fac.Dept); 
+
++------+
+| Dep |
++------+
+| ECE |
++------+
+
+
+
+
+Ans g)
+
+1)
+ALTER TABLE PROJECT DROP FOREIGN KEY PROJECT_ibfk_1;
+ALTER TABLE PROJECT ADD FOREIGN KEY ibfk_1(PI) REFERENCES FACULTY(EC) ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE INVESTIGATOR ADD FOREIGN KEY ibfk_1(EC) REFERENCES FACULTY(EC) ON DELETE CASCADE ON UPDATE CASCADE;
+DELETE FROM FACULTY WHERE EC = '1001';
+
+2)
+ALTER TABLE INVESTIGATOR ADD FOREIGN KEY ibfk_2(Code) REFERENCES PROJECT(Code) ON DELETE SET NULL ON UPDATE CASCADE;
+ALTER TABLE STAFF ADD FOREIGN KEY ibfk_2(Code) REFERENCES PROJECT(Code) ON DELETE SET NULL ON UPDATE CASCADE;
+DELETE FROM PROJECT WHERE Code = 'VSS1';
+
+3)
+Cannot add or update a child row: a foreign key constraint fails (`12CS10034`.`PROJECT`, CONSTRAINT `PROJECT_ibfk_3` FOREIGN KEY (`PI`) REFERENCES `FACULTY` (`EC`) ON DELETE CASCADE ON UPDATE CASCADE)
+The foreign key constraint will lead to failure of query
+
+4)
+ALTER TABLE PROJECT
+ADD CHECK(Value>=100000.00);
+
+5)
+ALTER TABLE STAFF
+ADD CHECK(floor(datediff(curdate(),Dob) / 365)>18);

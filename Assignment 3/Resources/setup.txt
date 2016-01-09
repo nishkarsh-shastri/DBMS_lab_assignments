@@ -1,0 +1,46 @@
+INSTRUCTIONS BEFORE EXECUTING THE SAMPLE CODE:
+
+1. Installing easy_install:
+
+LINK: https://pypi.python.org/pypi/setuptools
+
+wget https://bootstrap.pypa.io/ez_setup.py -O - | python
+
+wget https://bootstrap.pypa.io/ez_setup.py -O - | sudo python
+
+wget https://bootstrap.pypa.io/ez_setup.py -O - | python - --user
+
+
+
+2. installing pip:
+
+sudo -E easy_install pip
+
+
+3. installing lxml
+
+LINK: http://lxml.de/installation.html
+
+pip install lxml
+
+
+4. installing requests
+
+LINK: http://docs.python-requests.org/en/latest/user/install/
+
+pip install requests
+
+
+5. For connecting your database with your python code go through the link:
+   Using MySQLdb:
+   
+LINK: http://zetcode.com/db/mysqlpython/
+
+RUN AS FOLLOWING, e.g.
+-python sampleCode.py tt1905041
+(Sample Code attached)
+
+
+EXPECTED OUTPUT:
+
+{'rating': '7.2', 'votes': '193,194', 'description': 'Hobbs has Dom and Brian reassemble their crew in order to take down a mastermind who commands an organization of mercenary drivers across 12 countries. Payment? Full pardons for them all.', 'certification': '', 'poster': 'http://ia.media-imdb.com/images/M/MV5BMTM3NTg2NDQzOF5BMl5BanBnXkFtZTcwNjc2NzQzOQ@@._V1_SX214_.jpg', 'release_date': '24 May 2013', 'title': 'Furious 6', 'metascore': '61', 'director': 'Justin Lin', 'storyline': "Since Dom (Diesel) and Brian's (Walker) Rio heist toppled a kingpin's empire and left their crew with $100 million, our heroes have scattered across the globe. But their inability to return home and living forever on the lam have left their lives incomplete. Meanwhile, Hobbs (Johnson) has been tracking an organization of lethally skilled mercenary drivers across 12 countries, whose mastermind (Evans) is aided by a ruthless second-in-command revealed to be the love Dom thought was dead, Letty (Rodriguez). The only way to stop the criminal outfit is to outmatch them at street level, so Hobbs asks Dom to assemble his elite team in London. Payment? Full pardons for all of them so they can return home and make their families whole again.", 'stars': ['Vin Diesel', 'Paul Walker', 'Dwayne Johnson'], 'year': '2013', 'genre': ['Action', 'Crime', 'Thriller'], 'gallery': ['http://ia.media-imdb.com/images/G/01/imdb/images/nopicture/small/unknown-1394846836._V379391227_.png', 'http://ia.media-imdb.com/images/G/01/imdb/images/nopicture/small/unknown-1394846836._V379391227_.png', 'http://ia.media-imdb.com/images/G/01/imdb/images/nopicture/small/unknown-1394846836._V379391227_.png'], 'running_time': '130 min'}
